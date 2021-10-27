@@ -1,0 +1,48 @@
+vagrant file
+
+Vagrant.configure("2") do |config|
+Currently, there are only two supported versions: "1" and "2". Version 1 represents the configuration from Vagrant 1.0.x. "2" represents the configuration for 1.1+ leading up to 2.0.x
+
+vagrant hostmanager
+all active machines with the same provider will have their hosts file updated accordingly. Set the hostmanager.enabled attribute to true in the Vagrantfile to activate this behavior.
+	config.hostmanager.enabled = true 
+	config.hostmanager.manage_host = true
+
+vm.define
+Vagrant allows us to define more virtual machines by wrapping them in blocks like the following:
+	config.vm.define "db01" do |db01|
+	syntax- config.vm.define "<vmName>" do |<vmName>|
+  				<snip>
+			end
+
+	Note:You absolutely need to make sure you give them a unique hostname, IP address, and name setting so there aren’t conflicts.
+
+vagrant box
+This is the command used to manage (add, remove, etc.) boxes.
+	add, list, outdated, prune, remove, repackage ,update
+	mc01.vm.box = "geerlingguy/centos7" 
+	syntax - <vmName>.vm.box = "imagename"
+
+mc01.vm.hostname = "mc01"
+name of vm
+
+guest = a m/c that  going to be spin up which port that will be 
+	port forwarding=
+		guest_listening on = port, host ("how we get to that port from our host m/c which we are a that movement")
+
+		  e.g. guest = 80, host = 8089 
+		  (nginx listen on port 80)
+		  (on host which are services are running)
+
+	port private_network=
+		 syntax = "private_network", type: "dhcp"
+		 note: dhcp will give ip address to spining vm's
+
+		 syntax = "private_network", ip: "192.168.1.1"
+		 note: unique local area ip	
+
+SHELL in vm
+rmq01.vm.provision "shell", path: "rabbitmq.sh" (location of script) 
+
+provider	
+	unique configuration options
